@@ -27,10 +27,10 @@
 	<form action="home" method="get"><br />
 		<select name="category">
 			<option value="">カテゴリー</option>
-				<option value="">すべて表示</option>
-				<c:forEach items="${ categories }" var="category">
-					<option value="${ category.category }">${ category.category }</option>
-				</c:forEach>
+			<option value="">すべて表示</option>
+			<c:forEach items="${ categories }" var="category">
+				<option value="${ category.category }">${ category.category }</option>
+			</c:forEach>
 		</select>
 		<div style="display:inline-flex">
         	<label >From:</label><input type="text" name="insert_from" id="insert_from" placeholder="クリックしてください" />
@@ -38,16 +38,16 @@
         <div style="display:inline-flex">
         	<label >To:</label><input type="text" name="insert_to" id="insert_to" placeholder="クリックしてください" />
         </div>
-		<input type="submit" value="抽出"><br />
+		<input id="submit_button" type="submit" value="検索"><br />
 	</form>
 	</div>
 </div>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
-			<c:forEach items="${ errorMessages }" var="message">
-				<li><c:out value="${ message }" />
-			</c:forEach>
+		<c:forEach items="${ errorMessages }" var="message">
+			<li><c:out value="${ message }" />
+		</c:forEach>
 		</ul>
 	</div>
 	<c:remove var="errorMessages" scope="session" />
@@ -58,12 +58,14 @@
 		<div class="view">
 		<div class="message">
 			<div style="display:inline-flex" class="messagetop">
-				<div class="title"><span class="title"><c:out value="タイトル：${ message.title }" /></span></div>
-				<div class="category"><span class="category"><c:out value="カテゴリ：${ message.category }" /></span></div>
+				<div class="title"><span class="title"><c:out value="TITLE：${ message.title }" /></span></div>
+				<span style="margin-right: 30px;"></span>
+				<div class="category"><span class="category"><c:out value="CATEGORY：${ message.category }" /></span></div>
 			</div>
 			<div class="text"><span class="text"><c:out value="${ message.text }" /></span></div>
 			<div style="display:inline-flex">
 				<div class="name"><span class="name"><c:out value="投稿者：${ message.name }" /></span></div>
+				<span style="margin-right: 30px;"></span>
 				<div class="date"><fmt:formatDate value="${ message.insertDate }" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			</div>
 		<div class="delete">
@@ -117,8 +119,8 @@
         var dates = jQuery( '#insert_from, #insert_to' ) . datepicker( {
             showAnim: 'drop',
             changeMonth: true,
-            numberOfMonths: 2,
-            showCurrentAtPos: 1,
+            numberOfMonths: 1,
+            showCurrentAtPos: 0,
             dateFormat:"yy/mm/dd",
             onSelect: function( selectedDate ) {
                 var option = this . id == 'insert_from' ? 'minDate' : 'maxDate',

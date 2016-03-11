@@ -26,32 +26,15 @@ public class EditUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		User user = (User) request.getSession().getAttribute("loginUser");
-
-		if(user != null) {
 			HttpSession session = request.getSession();
-			List<String> messages = new ArrayList<String>();
-
 			int user_id = Integer.parseInt(request.getParameter("user_id"));
-			int branch_id = user.getBranch_id();
-			int department_id = user.getDepartment_id();
 
-			if(branch_id == 1 && department_id == 1) {
-				if(session.getAttribute("editUser") == null) {
-					User editUser = new UserListService().getSelectUser(user_id);
+			if(session.getAttribute("editUser") == null) {
+			User editUser = new UserListService().getSelectUser(user_id);
 
-					request.setAttribute("editUser", editUser);
-					request.getRequestDispatcher("edituser.jsp").forward(request, response);
-				}
-			} else {
-				messages.add("ユーザー管理画面へのアクセス権限がありません。");
-				session.setAttribute("errorMessages", messages);
-				response.sendRedirect("home");
+			request.setAttribute("editUser", editUser);
+			request.getRequestDispatcher("edituser.jsp").forward(request, response);
 			}
-		} else {
-			response.sendRedirect("./");
-		}
-
 	}
 
 
@@ -118,17 +101,14 @@ public class EditUserServlet extends HttpServlet {
 			messages.add("ログインIDは6字以上20字以下の半角英数字で入力してください。");
 		}
 
-		if(StringUtils.isEmpty(password)) {
-			messages.add("パスワードを入力してください");
-		}
 		if(!StringUtils.isEmpty(password) && !password.matches("^[a-zA-Z0-9-/:-@\\[-\\`\\{-\\~]{6,255}$")) {
 			messages.add("パスワードは6字以上255字以下の記号を含むすべての半角文字で入力してください。");
 		}
 
-		if(StringUtils.isEmpty(passwordConfirm)) {
+		if(!StringUtils.isEmpty(password) && StringUtils.isEmpty(passwordConfirm)) {
 			messages.add("確認用パスワードを入力してください");
 		}
-		if(!password.equals(passwordConfirm)) {
+		if(!StringUtils.isEmpty(password) && !password.equals(passwordConfirm)) {
 			messages.add("パスワードと確認用パスワードが違います。");
 		}
 

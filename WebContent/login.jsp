@@ -22,16 +22,19 @@
 	</div>
 	<c:remove var="errorMessages" scope="session" />
 </c:if>
-
+<div class="login">
 <form action="./" method="post"><br />
+<div style="display:inline-flex">
 	<label for="login_id">ログインID</label>
-	<input name="login_id" id="login_id" /><br />
-
+	<input name="login_id" id="login" /><br />
+</div>
+<div style="display:inline-flex">
 	<label for="password">パスワード</label>
-	<input name="password" type="password" id="password" /><br />
-
-	<input type="submit" value="ログイン" /><br />
+	<input name="password" type="password" id="login" /><br />
+</div>
+<input id="submit_button" type="submit" value="ログイン" /><br />
 </form>
+</div>
 
 </div>
 </body>

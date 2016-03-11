@@ -18,12 +18,12 @@ public class DeleteComment extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-			int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 
-			CommentService CommentService = new CommentService();
-			CommentService.deleteComment(id);
+		CommentService CommentService = new CommentService();
+		CommentService.deleteComment(id);
 
-			response.sendRedirect("home");
+		response.sendRedirect("home");
 	}
 
 }

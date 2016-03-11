@@ -33,31 +33,37 @@ public class HomeServlet extends HttpServlet {
 
 		User user = (User) request.getSession().getAttribute("loginUser");
 
-		if(user != null) {
+		List<UserMessage> messages = null;
+		InsertDateList insertDate = new InsertDateList();
 
-			List<UserMessage> messages = null;
-			InsertDateList insertDate = new InsertDateList();
+		String dateFrom = request.getParameter("insert_from");
+		String dateTo = request.getParameter("insert_to");
 
-			String dateFrom = request.getParameter("insert_from");
-			String dateTo = request.getParameter("insert_to");
+		if(StringUtils.isEmpty(dateFrom)) {
+			new MessageService().getDateFrom(insertDate);
+		} else {
+				insertDate.setFrom(dateFrom);
+		}
 
-			if(!StringUtils.isEmpty(dateFrom)) {
-					insertDate.setFrom(dateFrom);
-			}
+		if(StringUtils.isEmpty(dateFrom)) {
+			new MessageService().getDateFrom(insertDate);
+		} else {
+				insertDate.setFrom(dateFrom);
+		}
 
-			if (StringUtils.isEmpty(dateTo)) {
-				new MessageService().getDateTo(insertDate);
-			} else {
-					insertDate.setTo(dateTo);
-			}
+		if (StringUtils.isEmpty(dateTo)) {
+			new MessageService().getDateTo(insertDate);
+		} else {
+				insertDate.setTo(dateTo);
+		}
 
-			String category = request.getParameter("category");
+		String category = request.getParameter("category");
 
-			if(!StringUtils.isEmpty(category)) {
-				messages = new MessageService().getMessage(category, insertDate);
-			} else {
-				messages = new MessageService().getMessage(insertDate);
-			}
+		if(!StringUtils.isEmpty(category)) {
+			messages = new MessageService().getMessage(category, insertDate);
+		} else {
+			messages = new MessageService().getMessage(insertDate);
+		}
 
 			List<UserComment>comments = new CommentService().getComment();
 			List<CategoryList>categories = new MessageService().getCategory();
@@ -73,9 +79,6 @@ public class HomeServlet extends HttpServlet {
 			request.setAttribute("department_id", department_id);
 
 			request.getRequestDispatcher("top.jsp").forward(request, response);
-		} else {
-			response.sendRedirect("./");
-		}
 	}
 
 

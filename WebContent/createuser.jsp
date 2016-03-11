@@ -7,6 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./css/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="ConnectedSelect.js"></script>
+
   <title>ユーザー新規登録</title>
 </head>
 <body>
@@ -34,22 +37,24 @@
 	<input name="name" id="name" /><br />
 
 	<label for="branch_id" >支店</label>
-		<select name="branch_id">
-			<option value="0">選択してください</option>
-				<c:forEach items="${ branchList }" var="branchList">
-					<option value="${ branchList.id }">${ branchList.name }</option>
-				</c:forEach>
-			</select>
+	<select id="branch_id" name="branch_id">
+	<option value="0">選択してください</option>
+		<c:forEach items="${ branchList }" var="branchList">
+			<option value="${ branchList.id }">${ branchList.name }</option>
+		</c:forEach>
+	</select>
+
 	<label for="department_id">部署・役職</label>
-		<select name="department_id">
+	<select id="department_id" name="department_id" disabled="disabled">
 			<option value="0">選択してください</option>
 				<c:forEach items="${ departmentList }" var="departmentList">
-					<option value="${ departmentList.id }">${ departmentList.name }</option>
+					<option value="${ departmentList.id }" class="p1">${ departmentList.name }</option>
 				</c:forEach>
 		</select>
 	<input type="submit" onClick="check()" value="登録" /><br />
 </form>
 	<a href="usermanager">戻る</a>
 </div>
+
 </body>
 </html>

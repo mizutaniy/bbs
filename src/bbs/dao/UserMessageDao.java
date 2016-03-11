@@ -81,8 +81,8 @@ public class UserMessageDao {
 
 			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, category);
-			ps.setString(2, insertDate.getFrom());
-			ps.setString(3, insertDate.getTo());
+			ps.setString(2, insertDate.getFrom() + " 00:00");
+			ps.setString(3, insertDate.getTo() + " 23:59");
 
 			ResultSet rs = ps.executeQuery();
 			List<UserMessage> ret = toUserMessageList(rs);

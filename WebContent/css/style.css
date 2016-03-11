@@ -1,24 +1,66 @@
 body {
-	background-color: #E3FFFF;
+	background-color: #FFFFFF;
 }
 
 .main-contents {
-	margin-top: 0px;
-	margin-bottom: 0px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	margin-left: 20px;
 	margin-right: 20px;
 	background-color: white;
-	height: 100%;
-	width: 800px;
-}
-
-.tweet-box {
-	width: 780px;
-	height: 56px;
+	width: 1300px;
+	border: 1px;
+	border-style: dashed;
+	border-color: #006400;
+	border-radius:30px;
 }
 
 .header {
 	text-align: right;
+	margin-top: 15px;
+	margin-right: 15px;
+}
+
+a.header {/*リンクされた文字*/
+    color: #6B8E23;
+    font-style: normal;
+    text-decoration: none;
+}
+a:link {/*未訪問のリンク*/
+    color: #6B8E23;
+    font-style: normal;
+    text-decoration: none;
+}
+a:visited {/*訪問後のリンク*/
+    color: #9ACD32;
+    text-decoration: none;
+}
+a:hover {/*マウスをのせたとき*/
+    color: #6B8E23;
+    font-style: normal;
+    text-decoration: none;
+}
+a:active {/*クリック中*/
+    text-decoration:none;
+}
+
+.login {
+	position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin:auto;
+    width:400px;
+    height:300px;
+    text-align: center;
+
+    color: #aaa;
+}
+
+.narrow {
+	margin-top: 5px;
+	text-align: center;
 }
 
 .profile {
@@ -65,6 +107,7 @@ a.profile .account {
 .messagetop {
 	border-bottom-style: ridge;
 	font-weight: lighter;
+	font-family: 'Impact', sans-serif;
 	color: black;
 }
 
@@ -88,7 +131,8 @@ a.profile .account {
 }
 
 .messages {
-	margin: 10px 10px;
+	margin-right : 15%;
+ 	margin-left : 20%;
 }
 
 .message {
@@ -98,10 +142,14 @@ a.profile .account {
 }
 
 .view {
-	margin: 20px 20px;
+	margin: 50px 20px;
 	padding: 5px;
-	border-style: ridge;
-	background-color: #E3FFFF;
+	width: 80%;
+	border: 4px;
+	border-style: double;
+	border-color: #006400;
+	background-color: #FFFFFF;
+	border-radius:30px;
 }
 
 .comments {
@@ -144,4 +192,35 @@ label {
 	margin-left: 10px;
 	padding-top: 5px;
 	color: red;
+}
+
+
+input#submit_button {
+    background: #FFFFFF;
+	border-top: 1px solid #6B8E23;
+	border-left: 1px solid #6B8E23;
+	border-right: 1px solid #6B8E23;
+	border-bottom: 1px solid #6B8E23;
+	color:#111;
+	width: 80px;
+	padding: 10px 0;
+}
+
+input#login {
+	border:0;
+	padding:10px;
+	font-size:1.3em;
+	font-family:Arial, sans-serif;
+	color:#6B8E23;
+	border:solid 1px #ccc;
+	margin:0 0 20px;
+	width:300px;
+
+	 -webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
 }

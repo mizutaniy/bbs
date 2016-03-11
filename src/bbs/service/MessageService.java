@@ -156,6 +156,11 @@ public class MessageService {
 		try {
 			connection = getConnection();
 
+			//MessageDao commentDao = new MessageDao();
+			//List<UserComment> comment_id = commentDao.getCommentId(connection, id);
+			//CommentDao deleteDao = new CommentDao();
+			//deleteDao.deleteComment(connection, comment_id);
+
 			MessageDao messageDao = new MessageDao();
 			messageDao.deleteMessage(connection, id);
 

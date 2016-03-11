@@ -4,9 +4,13 @@ import static bbs.utils.CloseableUtil.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bbs.beans.Message;
+import bbs.beans.UserComment;
 import bbs.exception.SQLRuntimeException;
 
 
@@ -63,6 +67,48 @@ public class MessageDao {
 			throw new SQLRuntimeException(e);
 		} finally {
 			close(ps);
+		}
+	}
+
+
+	public List<UserComment> getCommentId(Connection connection, int message_id) {
+
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT id  FROM user_comment ");
+			sql.append("WHERE message_id = ?");
+
+			ps = connection.prepareStatement(sql.toString());
+			ps.setInt(1, message_id);
+
+			ResultSet rs = ps.executeQuery();
+			List<UserComment> ret = toCommentId(rs);
+
+			return ret;
+		} catch (SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+
+
+	private List<UserComment> toCommentId(ResultSet rs) throws SQLException {
+
+		List<UserComment> ret = new ArrayList<UserComment>();
+		try {
+			while(rs.next()) {
+				int id = rs.getInt("id");
+
+				UserComment comment_id = new UserComment();
+				comment_id.setMessage_id(id);
+
+				ret.add(comment_id);
+			}
+			return ret;
+		} finally {
+			close(rs);
 		}
 	}
 

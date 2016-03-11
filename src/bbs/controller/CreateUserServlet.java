@@ -27,34 +27,13 @@ public class CreateUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		User user = (User) request.getSession().getAttribute("loginUser");
+		List<BranchList> branchList = new BranchDepartmentService().getBranchList();
+		List<DepartmentList> departmentList = new BranchDepartmentService().getDepartmentList();
 
-		if(user != null) {
+		request.setAttribute("branchList", branchList);
+		request.setAttribute("departmentList", departmentList);
 
-			HttpSession session = request.getSession();
-			List<String> messages = new ArrayList<String>();
-
-			int branch_id = user.getBranch_id();
-			int department_id = user.getDepartment_id();
-
-			if(branch_id == 1 && department_id == 1) {
-
-				List<BranchList> branchList = new BranchDepartmentService().getBranchList();
-				List<DepartmentList> departmentList = new BranchDepartmentService().getDepartmentList();
-
-				request.setAttribute("branchList", branchList);
-				request.setAttribute("departmentList", departmentList);
-
-				request.getRequestDispatcher("createuser.jsp").forward(request, response);
-			} else {
-				messages.add("ユーザー管理画面へのアクセス権限がありません。");
-
-				session.setAttribute("errorMessages", messages);
-				response.sendRedirect("home");
-			}
-		} else {
-			response.sendRedirect("./");
-		}
+		request.getRequestDispatcher("createuser.jsp").forward(request, response);
 	}
 
 

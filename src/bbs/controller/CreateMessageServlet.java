@@ -25,14 +25,9 @@ public class CreateMessageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-			User user = (User) request.getSession().getAttribute("loginUser");
-
-			if(user != null) {
-				request.getRequestDispatcher("createmessage.jsp").forward(request, response);
-			} else {
-				response.sendRedirect("./");
-			}
+		request.getRequestDispatcher("createmessage.jsp").forward(request, response);
 	}
+
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -50,9 +45,7 @@ public class CreateMessageServlet extends HttpServlet {
 		message.setCategory(request.getParameter("category"));
 
 		if(isValid(request, messages) == true) {
-
 			new MessageService().register(message);
-
 			response.sendRedirect("home");
 		} else {
 			session.setAttribute("errorMessages", messages);

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class InsertDateList implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String from = "2016/03/09 00:00:00";
+	private String from;
 	private String to;
 
 	public String getFrom() {

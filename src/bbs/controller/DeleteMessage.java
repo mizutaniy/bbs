@@ -18,12 +18,12 @@ public class DeleteMessage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-			int id = Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 
-			MessageService MessageService = new MessageService();
-			MessageService.deleteMessage(id);
+		MessageService MessageService = new MessageService();
+		MessageService.deleteMessage(id);
 
-			response.sendRedirect("home");
+		response.sendRedirect("home");
 	}
 
 }

@@ -27,10 +27,10 @@ public class LoginServlet extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("loginUser");
 
 		if(user != null) {
-			response.sendRedirect("home");
-		} else {
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			HttpSession session = request.getSession();
+			session.invalidate();
 		}
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 
 
