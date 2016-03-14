@@ -21,8 +21,12 @@
 	</div>
 	<c:remove var="errorMessages" scope="session" />
 </c:if>
-<c:out value="${ editUser.login_id }" /><br />
-<c:out value="${ editUser.name }" /><br />
+<div class="input">
+<div class="input-top">
+<c:out value="ログインID： ${ editUser.login_id }" /><br />
+<c:out value="名前： ${ editUser.name }" /><br />
+</div>
+<div class="input-main">
 <form action="edituser" name="createuser" method="post"><br />
 	<input type="hidden" name="id" value="${ editUser.id }" />
 	<input type="hidden" name="presentLogin_id" value="${ editUser.login_id }" />
@@ -55,15 +59,17 @@
 			<option value="3">店長</option>
 			<option value="4">社員</option>
 		</select>
-	<input type="submit" value="登録" /><br />
+		<span style="margin-right: 80px;"></span>
+	<input id="submit_button" type="submit" value="登録" /><br />
 </form><br />
 
 <form action="deleteuser" name="deleteuser" method="post"><br />
 	<input type="hidden" name="id" value="${ editUser.id }">
-	<input type="submit" value="ユーザー削除"><br />
+	<input id="submit_button" type="submit" value="ユーザー削除"><br />
 </form>
-
-<a href="usermanager">戻る</a>
+<div class="back"><a href="usermanager" class="back">戻る</a></div>
+</div>
+</div>
 </div>
 </body>
 </html>

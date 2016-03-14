@@ -21,20 +21,28 @@
 	</div>
 	<c:remove var="errorMessages" scope="session" />
 </c:if>
+<div class="input">
+<div class="input-top">
+<c:out value="新規投稿" />
+</div>
+<div class="input-main">
 <form action="createmessage" method="post"><br />
 	<label for="title">件名</label>
-	<input name="title" id="title" size="40" /><br />
+	<input name="title" value="${ inputData.title }" id="title" size="40" /><br />
 
-	<label for="text">本文</label><br />
-	<textarea name="text" cols="50" rows="10" id="text"></textarea><br />
+	<label for="text">本文</label>
+	<textarea name="text" cols="50" rows="10" id="text" wrap="hard">${ inputData.text }</textarea><br />
 
 	<label for="category">カテゴリー</label>
-	<input name="category" id="category" /><br />
-
-	<input type="submit" value="登録" /><br />
-	<a href="home">戻る</a>
-
+	<div style="display:inline-flex">
+		<input name="category" value="${ inputData.category }" id="category" /><br />
+		<span style="margin-right: 50px;"></span>
+		<input id="submit_button" type="submit" value="登録" /><br />
+	</div>
 </form>
+<div class="back"><a href="home" class="back">戻る</a></div>
+</div>
+</div>
 
 </div>
 </body>

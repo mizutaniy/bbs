@@ -79,8 +79,8 @@ public class EditUserServlet extends HttpServlet {
 			}
 		} else {
 			session.setAttribute("errorMessages", messages);
-			request.setAttribute("inputData", user);
-			request.getRequestDispatcher("erroredituser.jsp").forward(request, response);
+			request.setAttribute("editUser", user);
+			request.getRequestDispatcher("edituser.jsp").forward(request, response);
 		}
 	}
 

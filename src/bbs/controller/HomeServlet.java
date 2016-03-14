@@ -101,10 +101,10 @@ public class HomeServlet extends HttpServlet {
 			new CommentService().register(comment);
 			response.sendRedirect("home");
 		} else {
-			session.setAttribute("errorComment", comment);
+			session.setAttribute("errorMessages", messages);
 
 			request.setAttribute("inputData", comment);
-			request.getRequestDispatcher("home").forward(request, response);
+			response.sendRedirect("home");
 		}
 	}
 
@@ -113,8 +113,11 @@ public class HomeServlet extends HttpServlet {
 
 		String text = request.getParameter("text");
 
-		if(StringUtils.isEmpty(text) || 500 < text.length()) {
-			messages.add("500文字以下で入力してください。");
+		if(StringUtils.isEmpty(text)) {
+			messages.add("コメントは500文字以下で入力してください。");
+		}
+		if(StringUtils.isNotEmpty(text) && 500 < text.length()) {
+			messages.add("aaaaコメントは500文字以下で入力してください。");
 		}
 		if(messages.size() == 0) {
 			return true;

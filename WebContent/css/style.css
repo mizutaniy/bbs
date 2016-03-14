@@ -1,5 +1,15 @@
+html {
+	height:100%;
+	overflow: auto;
+}
+
 body {
 	background-color: #FFFFFF;
+	height: 100%
+}
+
+textarea {
+    resize: none;
 }
 
 .main-contents {
@@ -8,17 +18,23 @@ body {
 	margin-left: 20px;
 	margin-right: 20px;
 	background-color: white;
-	width: 1300px;
-	border: 1px;
-	border-style: dashed;
-	border-color: #006400;
-	border-radius:30px;
+
+}
+
+.input-contents {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	margin-right: 20px;
+	background-color: white;
+	width: auto;
+	hight: auto;
 }
 
 .header {
-	text-align: right;
 	margin-top: 15px;
 	margin-right: 15px;
+	float: right;
 }
 
 a.header {/*リンクされた文字*/
@@ -32,7 +48,7 @@ a:link {/*未訪問のリンク*/
     text-decoration: none;
 }
 a:visited {/*訪問後のリンク*/
-    color: #9ACD32;
+    color: #6B8E23;
     text-decoration: none;
 }
 a:hover {/*マウスをのせたとき*/
@@ -45,55 +61,72 @@ a:active {/*クリック中*/
 }
 
 .login {
-	position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    margin:auto;
-    width:400px;
-    height:300px;
     text-align: center;
+    color: #000000;
+    width: 300px;
+	height: 200px;
+	min-width: 300px;
+	min-height: 200px;
+	margin: 200px auto;
+	background-color: #9ACD32;
+	border: 1px;
+	border-style: solid;
+	border-color: #006400;
+	border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+}
 
-    color: #aaa;
+.input {
+    color: #000000;
+    margin-top: 20px;
+	margin-right: 500px;
+	margin-left: 400px;
+	padding-bottom: 0px;
+	width: 500px;
+	background-color: #9ACD32;
+	border: 1px;
+	border-style: solid;
+	border-color: #006400;
+	border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+}
+
+.input-top {
+	margin: 5px;
+	padding: 10px 20px;
+	background-color: #8FBC8F;
+	color: #333;
+	font-weight: 500;
+	border: 0px;
+	background-color: #9ACD32;
+	border: 0px;
+	border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+}
+
+.input-main {
+	margin-top: 0px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 20px;
+	background-color: #FFFFFF;
+	border: 0px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	-webkit-border-bottom-left-radius: 30px;
+	-webkit-border-bottom-right-radius: 30px;
+	-moz-border-radius-bottomleft: 30px;
+	-moz-border-radius-bottomright: 30px;
+
 }
 
 .narrow {
-	margin-top: 5px;
-	text-align: center;
-}
-
-.profile {
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	margin-left: 10px;
-	height: 100px;
-}
-
-.profile .profile-image {
-	float: left;
-}
-
-.profile .name h2 {
-	font-size: 30px;
-	font-weight: bold;
-	line-height: 36px;
-	margin: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	margin-left: 0px;
-}
-
-a.profile .account {
-	font-size: 13px;
-	line-height: 22px;
-}
-
-.profile .description {
-	font-size: 13px;
-	line-height: 22px;
+	margin-top: 50px;
+	text-align:center;
 }
 
 .form-area {
@@ -105,15 +138,21 @@ a.profile .account {
 }
 
 .messagetop {
+	margin-bottom: 10px;
+	border: 1px;
 	border-bottom-style: ridge;
+	border-color: #8FBC8F;
 	font-weight: lighter;
-	font-family: 'Impact', sans-serif;
 	color: black;
 }
 
-.message .text {
+
+.message .text, .comment .text {
+	padding-left: 20px;
+	padding-bottom: 10px;
+	border: 1px;
 	border-bottom-style: ridge;
-	font-weight: lighter;
+	border-color: #8FBC8F;
 	color: black;
 	font-size: 14px;
 }
@@ -136,36 +175,50 @@ a.profile .account {
 }
 
 .message {
-	margin: 5px 10px;
+	margin: 10px 10px;
 	padding: 15px 10px;
 	background-color: #FFFFFF;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	word-break: break-all;
 }
 
 .view {
 	margin: 50px 20px;
 	padding: 5px;
 	width: 80%;
-	border: 4px;
-	border-style: double;
+	background-color: #9ACD32;
+	border: 1px;
+	border-style: solid;
 	border-color: #006400;
-	background-color: #FFFFFF;
-	border-radius:30px;
+	border-radius: 30px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
 }
 
 .comments {
 	margin-top: 5px;
 	margin-left: 100px;
 	margin-right:10px;
-	padding: 5px 10px 0px 5px;
+	padding: 5px 5px 0px 5px;
 }
 
 .comment {
-	padding-top: 5px;
-	padding-left: 10px;
+	width: 500px;
+	margin-bottom: 2px;
+	padding-top: 10px;
+	padding-left: 20px;
 	padding-right: 10px;
-	padding-bottom: 0px;
+	padding-bottom: 0;
+	border: 1px;
 	border-bottom-style: ridge;
+	border-color: #8FBC8F;
 	background-color: #FFFFFF;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	word-break: break-all;
 }
 
 .delete {
@@ -176,10 +229,6 @@ a.profile .account {
 	text-align: center;
 }
 
-.copyright {
-	width: 250px;
-	margin: 0 auto;
-}
 
 label {
 	display: block;
@@ -196,31 +245,72 @@ label {
 
 
 input#submit_button {
-    background: #FFFFFF;
-	border-top: 1px solid #6B8E23;
-	border-left: 1px solid #6B8E23;
-	border-right: 1px solid #6B8E23;
-	border-bottom: 1px solid #6B8E23;
+    background: #FFE4E1;
+	border: 1px solid;
+	border-color: #8FBC8F #006400 #006400 #8FBC8F;
 	color:#111;
-	width: 80px;
-	padding: 10px 0;
+	width: auto;
+	padding: 5px 10px;
 }
 
 input#login {
 	border:0;
-	padding:10px;
-	font-size:1.3em;
+	padding:5px;
+	font-size:2;
 	font-family:Arial, sans-serif;
 	color:#6B8E23;
-	border:solid 1px #ccc;
+	border:solid 1px #6B8E23;
 	margin:0 0 20px;
-	width:300px;
+}
 
-	 -webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
+.userlists {
+	margin: 80px;
+}
 
-	-moz-box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
-	-webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
-	box-shadow: inner 0 0 4px rgba(0, 0, 0, 0.2);
+.table {
+width: 80%;
+border-collapse: collapse;
+margin: 30px 150px 0px;
+}
+.table th{
+width: auto;
+padding: 6px;
+text-align: center;
+vertical-align: top;
+color: #333;
+background-color: #9ACD32;
+border: 1px solid #006400;
+}
+.table td{
+padding: 3px;
+background-color: #F5FFFA;
+border: 1px solid #006400;
+text-align: center;
+}
+
+a.botton {
+display:block;
+width: auto;
+padding: 8px 10px;
+text-align:center;
+border: 1px groove;
+border-color: #2E8B57;
+background-color: #FFE4E1;
+font-size: 15px;
+}
+
+a.back {
+	width: 30px;
+	margin-left: auto;
+	margin-bottom: 10px;
+	color: #EEE8AA;
+	display:block;
+	padding: 5px 10px;
+	border: 3px groove;
+	border-color: #6B8E23;
+	background-color: #556B2F;
+	font-size: 15px;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
 }

@@ -3,6 +3,7 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +18,13 @@
 <body>
 <div class="main-contents">
 
-<div class="header">
-	<a href="createmessage">新規投稿</a>
-	<a href="usermanager">ユーザー管理</a>
-	<a href="logout">ログアウト</a>
-</div>
+<div class="header" style="display:inline-flex">
+	<a href="createmessage" class="botton">新規投稿</a>
+	<span style="margin-right: 10px;"></span>
+	<a href="usermanager" class="botton">ユーザー管理</a>
+	<span style="margin-right: 10px;"></span>
+	<a href="logout" class="botton">ログアウト</a>
+</div><br />
 <div class="narrow">
 	<div style="display:inline-flex">
 	<form action="home" method="get"><br />
@@ -58,13 +61,16 @@
 		<div class="view">
 		<div class="message">
 			<div style="display:inline-flex" class="messagetop">
-				<div class="title"><span class="title"><c:out value="TITLE：${ message.title }" /></span></div>
+				<div class="title"><span class="title"><c:out value="タイトル：${ message.title }" /></span></div>
 				<span style="margin-right: 30px;"></span>
-				<div class="category"><span class="category"><c:out value="CATEGORY：${ message.category }" /></span></div>
+				<div class="category"><span class="category"><c:out value="カテゴリー：${ message.category }" /></span></div>
 			</div>
-			<div class="text"><span class="text"><c:out value="${ message.text }" /></span></div>
+			<div class="text"><span class="span">
+			<c:forEach var="str" items="${fn:split(message.text,'
+')}" ><c:out value="${str}" /><br></c:forEach>
+			</span></div>
 			<div style="display:inline-flex">
-				<div class="name"><span class="name"><c:out value="投稿者：${ message.name }" /></span></div>
+				<div class="name"><span class="span"><c:out value="投稿者：${ message.name }" /></span></div>
 				<span style="margin-right: 30px;"></span>
 				<div class="date"><fmt:formatDate value="${ message.insertDate }" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			</div>
@@ -72,7 +78,7 @@
 			<c:if test="${ branch_id == 1 && department_id == 2 || branch_id == message.branch_id && department_id == 3 }">
 				<form action="deletemessage" method="post"><br />
 					<input type="hidden" name="id" value="${ message.message_id }" />
-					<input type="submit" value="削除"><br />
+					<input id="submit_button" type="submit" value="削除"><br />
 				</form>
 			</c:if>
 		</div>
@@ -81,16 +87,20 @@
 			<c:forEach items="${ comments }" var="comment">
 				<c:if test="${ message.message_id == comment.message_id }">
 					<div class="comment">
-						<div class="text"><span class="text"><c:out value="${ comment.text }" /></span></div>
+						<div class="text"><span class="span">
+						<c:forEach var="splitcomment" items="${fn:split(comment.text,'
+')}" ><c:out value="${splitcomment}" /><br></c:forEach>
+						</span></div>
 						<div style="display:inline-flex">
 							<div class="name"><span class="name"><c:out value="${ comment.name }" /></span></div>
+							<span style="margin-right: 30px;"></span>
 							<div class="date"><fmt:formatDate value="${ comment.insertDate }" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						</div>
 					<div class="delete">
 						<c:if test="${ branch_id == 1 && department_id == 2 || branch_id == comment.branch_id && department_id == 3 }">
 							<form action="deletecomment" method="post"><br />
 								<input type="hidden" name="id" value="${ comment.id }" />
-								<input type="submit" value="削除"><br />
+								<input id="submit_button" type="submit" value="削除"><br />
 							</form>
 						</c:if>
 					</div><br />
@@ -101,8 +111,8 @@
 			<div class="createcomment">
 				<form action="home" method="post"><br />
 					<label for="text">コメント</label><br />
-					<textarea name="text" cols="40" rows="2" id="text" maxlength="500" required></textarea>
-					<input type="submit" value="投稿" /><br />
+					<textarea name="text" cols="50" rows="3" id="text" wrap="hard"></textarea>
+					<input id="submit_button" type="submit" value="投稿" />
 					<input type="hidden" name="message_id" value="${ message.message_id }">
 				</form>
 			</div><br />
@@ -122,6 +132,8 @@
             numberOfMonths: 1,
             showCurrentAtPos: 0,
             dateFormat:"yy/mm/dd",
+            minDate: new Date(2016, 3 - 1, 11),
+            maxDate: '+0d',
             onSelect: function( selectedDate ) {
                 var option = this . id == 'insert_from' ? 'minDate' : 'maxDate',
                     instance = $( this ) . data( 'datepicker' ),

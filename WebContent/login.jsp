@@ -10,31 +10,28 @@
 	<link href="./css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="main-contents">
-
-<c:if test="${ not empty errorMessages }">
-	<div class="errorMessages">
-		<ul>
+<div class="input-contents">
+	<c:if test="${ not empty errorMessages }">
+		<div class="errorMessages">
+			<ul>
 			<c:forEach items="${ errorMessages }" var="message">
 				<li><c:out value="${ message }" />
 			</c:forEach>
 		</ul>
+		<c:remove var="errorMessages" scope="session" />
+		</div>
+	</c:if>
+	<div class="login">
+		<form action="./" method="post"><br />
+		<label for="login_id">ログインID</label>
+		<input name="login_id" value="${ login_id }" id="login" /><br />
+
+		<label for="password">パスワード</label>
+		<input name="password" type="password" id="login" /><br />
+
+		<input id="submit_button" type="submit" value="ログイン" /><br />
+		</form>
 	</div>
-	<c:remove var="errorMessages" scope="session" />
-</c:if>
-<div class="login">
-<form action="./" method="post"><br />
-<div style="display:inline-flex">
-	<label for="login_id">ログインID</label>
-	<input name="login_id" id="login" /><br />
-</div>
-<div style="display:inline-flex">
-	<label for="password">パスワード</label>
-	<input name="password" type="password" id="login" /><br />
-</div>
-<input id="submit_button" type="submit" value="ログイン" /><br />
-</form>
-</div>
 
 </div>
 </body>

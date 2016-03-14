@@ -63,7 +63,7 @@ public class CreateUserServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("inputData", user);
-			request.getRequestDispatcher("errorcreateuser.jsp").forward(request, response);
+			request.getRequestDispatcher("createuser.jsp").forward(request, response);
 		}
 	}
 

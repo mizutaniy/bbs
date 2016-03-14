@@ -7,8 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./css/style.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script type="text/javascript" src="ConnectedSelect.js"></script>
 
   <title>ユーザー新規登録</title>
 </head>
@@ -24,9 +22,14 @@
 	</div>
 	<c:remove var="errorMessages" scope="session" />
 </c:if>
+<div class="input">
+<div class="input-top">
+<c:out value="ユーザー新規登録" />
+</div>
+<div class="input-main">
 <form action="createuser" name="createuser" method="post"><br />
 	<label for="login_id">ログインID</label>
-	<input name="login_id" id="login_id"  /><br />
+	<input name="login_id" id="login_id" value="${ inputData.login_id }" /><br />
 
 	<label for="password">パスワード</label>
 	<input type="password" name="password" id="password" /><br />
@@ -34,26 +37,28 @@
 	<input type="password" name="passwordConfirm" id="passwordConfirm" /><br />
 
 	<label for="name">名称</label>
-	<input name="name" id="name" /><br />
+	<input name="name" id="name" value="${ inputData.name }" /><br />
 
 	<label for="branch_id" >支店</label>
-	<select id="branch_id" name="branch_id">
-	<option value="0">選択してください</option>
-		<c:forEach items="${ branchList }" var="branchList">
-			<option value="${ branchList.id }">${ branchList.name }</option>
-		</c:forEach>
-	</select>
-
-	<label for="department_id">部署・役職</label>
-	<select id="department_id" name="department_id" disabled="disabled">
+		<select name="branch_id">
 			<option value="0">選択してください</option>
-				<c:forEach items="${ departmentList }" var="departmentList">
-					<option value="${ departmentList.id }" class="p1">${ departmentList.name }</option>
+				<c:forEach items="${ branchList }" var="branchList">
+					<option value="${ branchList.id }" >${ branchList.name }</option>
 				</c:forEach>
 		</select>
-	<input type="submit" onClick="check()" value="登録" /><br />
+	<label for="department_id">部署・役職</label>
+		<select name="department_id">
+			<option value="0">選択してください</option>
+				<c:forEach items="${ departmentList }" var="departmentList">
+					<option value="${ departmentList.id }">${ departmentList.name }</option>
+				</c:forEach>
+		</select>
+		<span style="margin-right: 80px;"></span>
+	<input id="submit_button" type="submit" value="登録" /><br />
 </form>
-	<a href="usermanager">戻る</a>
+<div class="back"><a href="usermanager" class="back">戻る</a></div>
+</div>
+</div>
 </div>
 
 </body>

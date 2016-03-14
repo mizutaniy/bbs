@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("errorMessages", messages);
 
 			request.setAttribute("login_id", login_id);
-			request.getRequestDispatcher("errorlogin.jsp").forward(request, response);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
 

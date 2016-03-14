@@ -50,7 +50,7 @@ public class CreateMessageServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("inputData", message);
-			request.getRequestDispatcher("errorcreatemessage.jsp").forward(request, response);
+			request.getRequestDispatcher("createmessage.jsp").forward(request, response);
 		}
 	}
 

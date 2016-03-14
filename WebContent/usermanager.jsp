@@ -13,28 +13,40 @@
 <body>
 <div class="main-contents">
 
-<div class="header">
-	<a href="createuser">ユーザー新規登録</a>
-	<a href="home">ホーム</a>
-</div>
+<div class="header" style="display:inline-flex">
+	<a href="createuser" class="botton">ユーザー新規登録</a>
+	<span style="margin-right: 10px;"></span>
+	<a href="home" class="botton">ホーム</a>
+</div><br />
 
 <div class="userlists">
-	<c:forEach items="${ userlists }" var="userlist">
-			<div class="id"><span class="id"><c:out value="ログインID：${ userlist.login_id }" /></span></div>
-			<div class="name"><span class="name"><c:out value="名前：${ userlist.name }" /></span></div>
-			<div class="branch_name"><span class="branch_name"><c:out value="支店：${ userlist.branch_name }" /></span></div>
-			<div class="department_name"><span class="department_name"><c:out value="部署・役職：${ userlist.department_name }" /></span></div>
-			<div class="status">
-			<div style="display:inline-flex">
-				<form action="edituser" method="get"><br />
-					<input type="hidden" name="user_id" value="${ userlist.id }" />
-					<input type="submit" value="編集"><br />
-				</form>
+		<table border="1" style="table-layout: auto;" class="table">
+			<tr>
+				<th>ログインID</th>
+				<th>名前</th>
+				<th>支店</th>
+				<th>部署・役職</th>
+				<th>編集</th>
+				<th>ステータス</th>
+			</tr>
+			<c:forEach items="${ userlists }" var="userlist">
+			<tr>
+				<td>${ userlist.login_id }</td>
+				<td>${ userlist.name }</td>
+				<td>${ userlist.branch_name }</td>
+				<td>${ userlist.department_name }</td>
+				<td>
+					<form action="edituser" method="get"><br />
+						<input type="hidden" name="user_id" value="${ userlist.id }" />
+						<input id="submit_button" type="submit" value="編集"><br />
+					</form>
+				</td>
+				<td>
 				<c:if test="${ userlist.status  == 0 }">
 					<form action="usermanager" method="post"><br />
 						<input type="hidden" name="user_id" value="${ userlist.id }" />
 						<input type="hidden" name="status" value="1" />
-						<input type="submit" onClick="return confirm('ユーザーを停止しますか');" value="停止"><br />
+						<input id="submit_button" type="submit" onClick="return confirm('ユーザーを停止しますか');" value="停止"><br />
 					</form>
 				</c:if>
 				<c:if test="${ userlist.status == 1 }">
@@ -42,12 +54,13 @@
 					<form action="usermanager" method="post"><br />
 						<input type="hidden" name="user_id" value="${ userlist.id }" />
 						<input type="hidden" name="status" value="0" />
-						<input type="submit" onClick="return confirm('ユーザーを復活しますか');" value="復活"><br />
+						<input id="submit_button" type="submit" onClick="return confirm('ユーザーを復活しますか');" value="復活"><br />
 					</form>
 				</c:if>
-			</div>
-		</div><br />
-	</c:forEach>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
 </div>
 
 </div>
