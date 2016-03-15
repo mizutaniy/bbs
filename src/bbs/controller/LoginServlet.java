@@ -41,11 +41,11 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		List<String> messages = new ArrayList<String>();
 
-		String login_id = request.getParameter("login_id");
+		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
 		LoginService loginService = new LoginService();
-		User user = loginService.login(login_id, password);
+		User user = loginService.login(loginId, password);
 
 		if(isValid(request, messages) == true) {
 				session.setAttribute("loginUser", user);
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			session.setAttribute("errorMessages", messages);
 
-			request.setAttribute("login_id", login_id);
+			request.setAttribute("loginId", loginId);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}
@@ -61,19 +61,19 @@ public class LoginServlet extends HttpServlet {
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 
-		String login_id = request.getParameter("login_id");
+		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 
 		LoginService loginService = new LoginService();
-		User user = loginService.login(login_id, password);
+		User user = loginService.login(loginId, password);
 
-		if(StringUtils.isEmpty(login_id)) {
+		if(StringUtils.isEmpty(loginId)) {
 			messages.add("ログインIDを入力してください。");
 		}
 		if(StringUtils.isEmpty(password)) {
 			messages.add("パスワードを入力してください。");
 		}
-		if(StringUtils.isNotEmpty(login_id) && StringUtils.isNotEmpty(password) && user == null) {
+		if(StringUtils.isNotEmpty(loginId) && StringUtils.isNotEmpty(password) && user == null) {
 			messages.add("ログインに失敗しました。");
 		}
 		if(user != null && user.getStatus() == 1) {

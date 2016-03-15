@@ -23,13 +23,13 @@
 	</c:if>
 	<div class="login">
 		<form action="./" method="post"><br />
-		<label for="login_id">ログインID</label>
-		<input name="login_id" value="${ login_id }" id="login" /><br />
+		<label for="loginId">ログインID</label>
+		<input name="loginId" value="${ loginId }" id="login" /><br />
 
 		<label for="password">パスワード</label>
 		<input name="password" type="password" id="login" /><br />
 
-		<input id="submit_button" type="submit" value="ログイン" /><br />
+		<input id="submitButton" type="submit" value="ログイン" /><br />
 		</form>
 	</div>
 

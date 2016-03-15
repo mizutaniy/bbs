@@ -6,22 +6,22 @@ import java.util.Date;
 public class Comment implements Serializable {
 	private static final long serialVersionUID =1L;
 
-	private int user_id;
-	private int message_id;
+	private int userId;
+	private int messageId;
 	private String text;
 	private Date insertDate;
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public int getMessage_id() {
-		return message_id;
+	public int getMessageId() {
+		return messageId;
 	}
-	public void setMessage_id(int message_id) {
-		this.message_id = message_id;
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
 	}
 	public String getText() {
 		return text;

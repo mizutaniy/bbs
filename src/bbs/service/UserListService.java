@@ -39,14 +39,14 @@ public class UserListService {
 	}
 
 
-	public void update(int user_id, int status) {
+	public void update(int userId, int status) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserListDao userlistDao = new UserListDao();
-			userlistDao.update(connection, user_id, status);
+			userlistDao.update(connection, userId, status);
 
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -109,14 +109,14 @@ public class UserListService {
 	}
 
 
-	public User getSelectUser(int user_id) {
+	public User getSelectUser(int userId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserDao userDao = new UserDao();
-			User ret = userDao.getSelectUser(connection, user_id);
+			User ret = userDao.getSelectUser(connection, userId);
 
 			commit(connection);
 			return ret;
@@ -132,14 +132,14 @@ public class UserListService {
 	}
 
 
-	public User duplicateUser(String login_id) {
+	public User duplicateUser(String loginId) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserDao userDao = new UserDao();
-			User user = userDao.duplicateUser(connection, login_id);
+			User user = userDao.duplicateUser(connection, loginId);
 
 			commit(connection);
 			return user;

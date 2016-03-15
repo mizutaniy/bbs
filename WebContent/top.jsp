@@ -35,13 +35,18 @@
 				<option value="${ category.category }">${ category.category }</option>
 			</c:forEach>
 		</select>
+		<span style="margin-right: 10px;"></span>
 		<div style="display:inline-flex">
-        	<label >From:</label><input type="text" name="insert_from" id="insert_from" placeholder="クリックしてください" />
+		<div style="display:inline-flex">
+        	<label >From:</label><input type="text" name="insertFrom" id="insertFrom" placeholder="クリックしてください" />
         </div>
+        <span style="margin-right: 10px;"></span>
         <div style="display:inline-flex">
-        	<label >To:</label><input type="text" name="insert_to" id="insert_to" placeholder="クリックしてください" />
+        	<label >To:</label><input type="text" name="insertTo" id="insertTo" placeholder="クリックしてください" />
         </div>
-		<input id="submit_button" type="submit" value="検索"><br />
+        <span style="margin-right: 10px;"></span>
+		<input id="submitButton" type="submit" value="検索"><br />
+		</div>
 	</form>
 	</div>
 </div>
@@ -60,47 +65,46 @@
 	<c:forEach items="${ messages }" var="message">
 		<div class="view">
 		<div class="message">
-			<div style="display:inline-flex" class="messagetop">
-				<div class="title"><span class="title"><c:out value="タイトル：${ message.title }" /></span></div>
-				<span style="margin-right: 30px;"></span>
-				<div class="category"><span class="category"><c:out value="カテゴリー：${ message.category }" /></span></div>
+			<div class="messagetop">
+				<div class="title"><span class="title"><c:out value="${ message.title }" /></span></div>
 			</div>
+			<div class="category"><span class="category"><c:out value="カテゴリー：${ message.category }" /></span></div>
 			<div class="text"><span class="span">
 			<c:forEach var="str" items="${fn:split(message.text,'
 ')}" ><c:out value="${str}" /><br></c:forEach>
 			</span></div>
-			<div style="display:inline-flex">
+			<div class="messagebottom" style="display:inline-flex">
 				<div class="name"><span class="span"><c:out value="投稿者：${ message.name }" /></span></div>
 				<span style="margin-right: 30px;"></span>
 				<div class="date"><fmt:formatDate value="${ message.insertDate }" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			</div>
 		<div class="delete">
-			<c:if test="${ branch_id == 1 && department_id == 2 || branch_id == message.branch_id && department_id == 3 }">
+			<c:if test="${ branchId == 1 && departmentId == 2 || branchId == message.branchId && departmentId == 3 }">
 				<form action="deletemessage" method="post"><br />
-					<input type="hidden" name="id" value="${ message.message_id }" />
-					<input id="submit_button" type="submit" value="削除"><br />
+					<input type="hidden" name="id" value="${ message.messageId }" />
+					<input id="submitButton" type="submit" value="削除"><br />
 				</form>
 			</c:if>
 		</div>
 		</div>
 		<div class="comments">
 			<c:forEach items="${ comments }" var="comment">
-				<c:if test="${ message.message_id == comment.message_id }">
+				<c:if test="${ message.messageId == comment.messageId }">
 					<div class="comment">
 						<div class="text"><span class="span">
 						<c:forEach var="splitcomment" items="${fn:split(comment.text,'
 ')}" ><c:out value="${splitcomment}" /><br></c:forEach>
 						</span></div>
 						<div style="display:inline-flex">
-							<div class="name"><span class="name"><c:out value="${ comment.name }" /></span></div>
+							<div class="name"><span class="name"><c:out value="投稿者：${ comment.name }" /></span></div>
 							<span style="margin-right: 30px;"></span>
 							<div class="date"><fmt:formatDate value="${ comment.insertDate }" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						</div>
 					<div class="delete">
-						<c:if test="${ branch_id == 1 && department_id == 2 || branch_id == comment.branch_id && department_id == 3 }">
+						<c:if test="${ branchId == 1 && departmentId == 2 || branchId == comment.branchId && departmentId == 3 }">
 							<form action="deletecomment" method="post"><br />
 								<input type="hidden" name="id" value="${ comment.id }" />
-								<input id="submit_button" type="submit" value="削除"><br />
+								<input id="submitButton" type="submit" value="削除"><br />
 							</form>
 						</c:if>
 					</div><br />
@@ -111,9 +115,12 @@
 			<div class="createcomment">
 				<form action="home" method="post"><br />
 					<label for="text">コメント</label><br />
-					<textarea name="text" cols="50" rows="3" id="text" wrap="hard"></textarea>
-					<input id="submit_button" type="submit" value="投稿" />
-					<input type="hidden" name="message_id" value="${ message.message_id }">
+					<div style="display:inline-flex">
+						<textarea name="text" cols="50" rows="3" id="text" wrap="hard"></textarea>
+						<span style="margin-right: 10px;"></span>
+						<input id="submitButton" type="submit" value="投稿" />
+					</div>
+					<input type="hidden" name="messageId" value="${ message.messageId }">
 				</form>
 			</div><br />
 	</div>
@@ -126,7 +133,7 @@
 <!-- スクリプト部分 -->
 <script>
     $( function() {
-        var dates = jQuery( '#insert_from, #insert_to' ) . datepicker( {
+        var dates = jQuery( '#insertFrom, #insertTo' ) . datepicker( {
             showAnim: 'drop',
             changeMonth: true,
             numberOfMonths: 1,
@@ -135,7 +142,7 @@
             minDate: new Date(2016, 3 - 1, 11),
             maxDate: '+0d',
             onSelect: function( selectedDate ) {
-                var option = this . id == 'insert_from' ? 'minDate' : 'maxDate',
+                var option = this . id == 'insertFrom' ? 'minDate' : 'maxDate',
                     instance = $( this ) . data( 'datepicker' ),
                     date = $ . datepicker . parseDate(
                         instance . settings . dateFormat ||

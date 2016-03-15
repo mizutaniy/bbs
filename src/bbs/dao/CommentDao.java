@@ -30,8 +30,8 @@ public class CommentDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, comment.getUser_id());
-			ps.setInt(2, comment.getMessage_id());
+			ps.setInt(1, comment.getUserId());
+			ps.setInt(2, comment.getMessageId());
 			ps.setString(3, comment.getText());
 
 			ps.executeUpdate();

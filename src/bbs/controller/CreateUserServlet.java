@@ -45,11 +45,11 @@ public class CreateUserServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		User user = new User();
-		user.setLogin_id(request.getParameter("login_id"));
+		user.setLoginId(request.getParameter("loginId"));
 		user.setPassword(request.getParameter("password"));
 		user.setName(request.getParameter("name"));
-		user.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-		user.setDepartment_id(Integer.parseInt(request.getParameter("department_id")));
+		user.setBranchId(Integer.parseInt(request.getParameter("branchId")));
+		user.setDepartmentId(Integer.parseInt(request.getParameter("departmentId")));
 
 		List<BranchList> branchList = new BranchDepartmentService().getBranchList();
 		List<DepartmentList> departmentList = new BranchDepartmentService().getDepartmentList();
@@ -68,17 +68,17 @@ public class CreateUserServlet extends HttpServlet {
 	}
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
-		String login_id = request.getParameter("login_id");
+		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 		String passwordConfirm = request.getParameter("passwordConfirm");
 		String name = request.getParameter("name");
-		int branch_id = Integer.parseInt(request.getParameter("branch_id"));
-		int department_id = Integer.parseInt(request.getParameter("department_id"));
+		int branchId = Integer.parseInt(request.getParameter("branchId"));
+		int departmentId = Integer.parseInt(request.getParameter("departmentId"));
 
-		if(StringUtils.isEmpty(login_id)) {
+		if(StringUtils.isEmpty(loginId)) {
 			messages.add("ログインIDを入力してください。");
 		}
-		if(!StringUtils.isEmpty(login_id) && !login_id.matches("^[0-9A-Za-z]{6,20}$")) {
+		if(!StringUtils.isEmpty(loginId) && !loginId.matches("^[0-9A-Za-z]{6,20}$")) {
 			messages.add("ログインIDは6字以上20字以下の半角英数字で入力してください。");
 		}
 
@@ -103,15 +103,15 @@ public class CreateUserServlet extends HttpServlet {
 			messages.add("名称は10字以内で入力してください。");
 		}
 
-		if(branch_id == 0) {
+		if(branchId == 0) {
 			messages.add("支店を選択してください");
 		}
-		if(department_id == 0) {
+		if(departmentId == 0) {
 			messages.add("部署・役職を選択してください");
 		}
 
 		UserListService signupService = new UserListService();
-		User user = signupService.duplicateUser(login_id);
+		User user = signupService.duplicateUser(loginId);
 		if(user != null) {
 			messages.add("ログインIDがすでに利用されています");
 		}

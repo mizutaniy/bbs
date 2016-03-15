@@ -38,7 +38,7 @@ public class MessageDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setInt(1, message.getUser_id());
+			ps.setInt(1, message.getUserId());
 			ps.setString(2, message.getTitle());
 			ps.setString(3, message.getText());
 			ps.setString(4, message.getCategory());
@@ -71,7 +71,7 @@ public class MessageDao {
 	}
 
 
-	public List<UserComment> getCommentId(Connection connection, int message_id) {
+	public List<UserComment> getCommentId(Connection connection, int messageId) {
 
 		PreparedStatement ps = null;
 		try {
@@ -80,7 +80,7 @@ public class MessageDao {
 			sql.append("WHERE message_id = ?");
 
 			ps = connection.prepareStatement(sql.toString());
-			ps.setInt(1, message_id);
+			ps.setInt(1, messageId);
 
 			ResultSet rs = ps.executeQuery();
 			List<UserComment> ret = toCommentId(rs);
@@ -101,10 +101,10 @@ public class MessageDao {
 			while(rs.next()) {
 				int id = rs.getInt("id");
 
-				UserComment comment_id = new UserComment();
-				comment_id.setMessage_id(id);
+				UserComment commentId = new UserComment();
+				commentId.setMessageId(id);
 
-				ret.add(comment_id);
+				ret.add(commentId);
 			}
 			return ret;
 		} finally {

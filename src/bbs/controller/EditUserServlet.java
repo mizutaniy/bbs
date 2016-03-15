@@ -26,15 +26,22 @@ public class EditUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-			HttpSession session = request.getSession();
-			int user_id = Integer.parseInt(request.getParameter("user_id"));
+		HttpSession session = request.getSession();
+		List<String> messages = new ArrayList<String>();
 
-			if(session.getAttribute("editUser") == null) {
-			User editUser = new UserListService().getSelectUser(user_id);
+		String userId = request.getParameter("userId");
 
-			request.setAttribute("editUser", editUser);
-			request.getRequestDispatcher("edituser.jsp").forward(request, response);
+		if (userId != null && userId.matches("^\\d{1,9}$")) {
+			User editUser = new UserListService().getSelectUser(Integer.parseInt(userId));
+			if(editUser != null) {
+				request.setAttribute("editUser", editUser);
+				request.getRequestDispatcher("edituser.jsp").forward(request, response);
+				return;
 			}
+		}
+		messages.add("編集するユーザーを選択してください。");
+		session.setAttribute("errorMessages", messages);
+		response.sendRedirect("usermanager");
 	}
 
 
@@ -45,14 +52,14 @@ public class EditUserServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		List<String> messages = new ArrayList<String>();
 
-		String presentLogin_id = request.getParameter("presentLogin_id");
+		String presentLoginId = request.getParameter("presentLoginId");
 		String presentName = request.getParameter("presentName");
-		request.setAttribute("presentLogin_id", presentLogin_id);
+		request.setAttribute("presentLoginId", presentLoginId);
 		request.setAttribute("presentName",presentName);
 
 		User user = new User();
 		user.setId(Integer.parseInt(request.getParameter("id")));
-		user.setLogin_id(request.getParameter("login_id"));
+		user.setLoginId(request.getParameter("loginId"));
 
 		if(StringUtils.isEmpty(request.getParameter("password"))) {
 			user.setPassword(request.getParameter("presentPassword"));
@@ -62,8 +69,8 @@ public class EditUserServlet extends HttpServlet {
 		}
 
 		user.setName(request.getParameter("name"));
-		user.setBranch_id(Integer.parseInt(request.getParameter("branch_id")));
-		user.setDepartment_id(Integer.parseInt(request.getParameter("department_id")));
+		user.setBranchId(Integer.parseInt(request.getParameter("branchId")));
+		user.setDepartmentId(Integer.parseInt(request.getParameter("departmentId")));
 
 		if(isValid(request, messages) == true) {
 
@@ -87,17 +94,17 @@ public class EditUserServlet extends HttpServlet {
 
 	private boolean isValid(HttpServletRequest request, List<String> messages) {
 		int id = Integer.parseInt(request.getParameter("id"));
-		String login_id = request.getParameter("login_id");
+		String loginId = request.getParameter("loginId");
 		String password = request.getParameter("password");
 		String passwordConfirm = request.getParameter("passwordConfirm");
 		String name = request.getParameter("name");
-		int branch_id = Integer.parseInt(request.getParameter("branch_id"));
-		int department_id = Integer.parseInt(request.getParameter("department_id"));
+		int branchId = Integer.parseInt(request.getParameter("branchId"));
+		int departmentId = Integer.parseInt(request.getParameter("departmentId"));
 
-		if(StringUtils.isEmpty(login_id)) {
+		if(StringUtils.isEmpty(loginId)) {
 			messages.add("ログインIDを入力してください。");
 		}
-		if(!StringUtils.isEmpty(login_id) && !login_id.matches("^[0-9A-Za-z]{6,20}$")) {
+		if(!StringUtils.isEmpty(loginId) && !loginId.matches("^[0-9A-Za-z]{6,20}$")) {
 			messages.add("ログインIDは6字以上20字以下の半角英数字で入力してください。");
 		}
 
@@ -119,15 +126,15 @@ public class EditUserServlet extends HttpServlet {
 			messages.add("名称は10字以内で入力してください。");
 		}
 
-		if(branch_id == 0) {
+		if(branchId == 0) {
 			messages.add("支店を選択してください");
 		}
-		if(department_id == 0) {
+		if(departmentId == 0) {
 			messages.add("部署・役職を選択してください");
 		}
 
 		UserListService signupService = new UserListService();
-		User user = signupService.duplicateUser(login_id);
+		User user = signupService.duplicateUser(loginId);
 		if(user != null && id != user.getId()) {
 			messages.add("ログインIDがすでに利用されています");
 		}

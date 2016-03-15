@@ -45,7 +45,7 @@ public class UserListDao {
 	}
 
 
-	public List<UserList> getUserList(Connection connection, int user_id) {
+	public List<UserList> getUserList(Connection connection, int userId) {
 
 		PreparedStatement ps = null;
 		try {
@@ -73,19 +73,19 @@ public class UserListDao {
 		try {
 			while(rs.next()) {
 				int id = rs.getInt("id");
-				String login_id = rs.getString("login_id");
+				String loginId = rs.getString("login_id");
 				String name = rs.getString("name");
-				String branch_name = rs.getString("branch_name");
-				String department_name = rs.getString("department_name");
+				String branchName = rs.getString("branch_name");
+				String departmentName = rs.getString("department_name");
 				int status = rs.getInt("status");
 				Timestamp updateDate = rs.getTimestamp("update_date");
 
 				UserList userlist = new UserList();
 				userlist.setId(id);
-				userlist.setLogin_id(login_id);
+				userlist.setLoginId(loginId);
 				userlist.setName(name);
-				userlist.setBranch_name(branch_name);
-				userlist.setDepartment_name(department_name);
+				userlist.setBranchName(branchName);
+				userlist.setDepartmentName(departmentName);
 				userlist.setStatus(status);
 				userlist.setUpdate(updateDate);
 
@@ -315,11 +315,11 @@ public class UserListDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, user.getLogin_id());
+			ps.setString(1, user.getLoginId());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getName());
-			ps.setInt(4, user.getBranch_id());
-			ps.setInt(5, user.getDepartment_id());
+			ps.setInt(4, user.getBranchId());
+			ps.setInt(5, user.getDepartmentId());
 
 			ps.executeUpdate();
 
@@ -331,7 +331,7 @@ public class UserListDao {
 	}
 
 
-	public void update(Connection connection, int user_id, int status) {
+	public void update(Connection connection, int userId, int status) {
 
 		PreparedStatement ps = null;
 		try {
@@ -345,7 +345,7 @@ public class UserListDao {
 			ps = connection.prepareStatement(sql.toString());
 
 			ps.setInt(1, status);
-			ps.setInt(2, user_id);
+			ps.setInt(2, userId);
 
 			int count = ps.executeUpdate();
 			if(count == 0) {
@@ -376,11 +376,11 @@ public class UserListDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, user.getLogin_id());
+			ps.setString(1, user.getLoginId());
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getName());
-			ps.setInt(4, user.getBranch_id());
-			ps.setInt(5, user.getDepartment_id());
+			ps.setInt(4, user.getBranchId());
+			ps.setInt(5, user.getDepartmentId());
 			ps.setInt(6, user.getId());
 
 			int count = ps.executeUpdate();

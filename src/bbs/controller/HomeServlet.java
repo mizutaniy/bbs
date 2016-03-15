@@ -36,8 +36,8 @@ public class HomeServlet extends HttpServlet {
 		List<UserMessage> messages = null;
 		InsertDateList insertDate = new InsertDateList();
 
-		String dateFrom = request.getParameter("insert_from");
-		String dateTo = request.getParameter("insert_to");
+		String dateFrom = request.getParameter("insertFrom");
+		String dateTo = request.getParameter("insertTo");
 
 		if(StringUtils.isEmpty(dateFrom)) {
 			new MessageService().getDateFrom(insertDate);
@@ -72,11 +72,11 @@ public class HomeServlet extends HttpServlet {
 			request.setAttribute("comments", comments);
 			request.setAttribute("categories", categories);
 
-			int branch_id = user.getBranch_id();
-			int department_id = user.getDepartment_id();
+			int branchId = user.getBranchId();
+			int departmentId = user.getDepartmentId();
 
-			request.setAttribute("branch_id", branch_id);
-			request.setAttribute("department_id", department_id);
+			request.setAttribute("branchId", branchId);
+			request.setAttribute("departmentId", departmentId);
 
 			request.getRequestDispatcher("top.jsp").forward(request, response);
 	}
@@ -92,8 +92,8 @@ public class HomeServlet extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("loginUser");
 
 		Comment comment = new Comment();
-		comment.setUser_id(user.getId());
-		comment.setMessage_id(Integer.parseInt(request.getParameter("message_id")));
+		comment.setUserId(user.getId());
+		comment.setMessageId(Integer.parseInt(request.getParameter("messageId")));
 		comment.setText(request.getParameter("text"));
 
 		if(isValid(request, messages) == true) {

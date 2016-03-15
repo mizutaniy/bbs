@@ -15,13 +15,13 @@ import bbs.exception.SQLRuntimeException;
 
 public class UserDao {
 
-	public User getUser(Connection connection, String login_id, String password) {
+	public User getUser(Connection connection, String loginId, String password) {
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM users WHERE login_id = ? AND password = ?";
 
 			ps = connection.prepareStatement(sql);
-			ps.setString(1, login_id);
+			ps.setString(1, loginId);
 			ps.setString(2, password);
 
 			ResultSet rs = ps.executeQuery();
@@ -42,14 +42,14 @@ public class UserDao {
 	}
 
 
-	public User duplicateUser(Connection connection, String login_id) {
+	public User duplicateUser(Connection connection, String loginId) {
 
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM users WHERE (login_id = ?)";
 
 			ps = connection.prepareStatement(sql);
-			ps.setString(1, login_id);
+			ps.setString(1, loginId);
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);
@@ -87,14 +87,14 @@ public class UserDao {
 	}
 
 
-	public User getSelectUser(Connection connection, int user_id) {
+	public User getSelectUser(Connection connection, int userId) {
 
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM users WHERE (id = ?)";
 
 			ps = connection.prepareStatement(sql);
-			ps.setInt(1, user_id);
+			ps.setInt(1, userId);
 
 			ResultSet rs = ps.executeQuery();
 			List<User> userList = toUserList(rs);
@@ -118,22 +118,22 @@ public class UserDao {
 		try {
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				String login_id = rs.getString("login_id");
+				String loginId = rs.getString("login_id");
 				String password = rs.getString("password");
 				String name = rs.getString("name");
-				int branch_id = rs.getInt("branch_id");
-				int department_id = rs.getInt("department_id");
+				int branchId = rs.getInt("branch_id");
+				int departmentId = rs.getInt("department_id");
 				int status = rs.getInt("status");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 				Timestamp updateDate = rs.getTimestamp("update_date");
 
 				User user = new User();
 				user.setId(id);
-				user.setLogin_id(login_id);
+				user.setLoginId(loginId);
 				user.setPassword(password);
 				user.setName(name);
-				user.setBranch_id(branch_id);
-				user.setDepartment_id(department_id);
+				user.setBranchId(branchId);
+				user.setDepartmentId(departmentId);
 				user.setStatus(status);
 				user.setInsertDate(insertDate);
 				user.setUpdateDate(updateDate);

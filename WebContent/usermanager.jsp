@@ -18,7 +18,16 @@
 	<span style="margin-right: 10px;"></span>
 	<a href="home" class="botton">ホーム</a>
 </div><br />
-
+<c:if test="${ not empty errorMessages }">
+	<div class="errorMessages">
+		<ul>
+		<c:forEach items="${ errorMessages }" var="message">
+			<li><c:out value="${ message }" />
+		</c:forEach>
+		</ul>
+	</div>
+	<c:remove var="errorMessages" scope="session" />
+</c:if>
 <div class="userlists">
 		<table border="1" style="table-layout: auto;" class="table">
 			<tr>
@@ -31,30 +40,30 @@
 			</tr>
 			<c:forEach items="${ userlists }" var="userlist">
 			<tr>
-				<td>${ userlist.login_id }</td>
+				<td>${ userlist.loginId }</td>
 				<td>${ userlist.name }</td>
-				<td>${ userlist.branch_name }</td>
-				<td>${ userlist.department_name }</td>
+				<td>${ userlist.branchName }</td>
+				<td>${ userlist.departmentName }</td>
 				<td>
 					<form action="edituser" method="get"><br />
-						<input type="hidden" name="user_id" value="${ userlist.id }" />
-						<input id="submit_button" type="submit" value="編集"><br />
+						<input type="hidden" name="userId" value="${ userlist.id }" />
+						<input id="submitButton" type="submit" value="編集"><br />
 					</form>
 				</td>
 				<td>
 				<c:if test="${ userlist.status  == 0 }">
 					<form action="usermanager" method="post"><br />
-						<input type="hidden" name="user_id" value="${ userlist.id }" />
+						<input type="hidden" name="userId" value="${ userlist.id }" />
 						<input type="hidden" name="status" value="1" />
-						<input id="submit_button" type="submit" onClick="return confirm('ユーザーを停止しますか');" value="停止"><br />
+						<input id="submitButton" type="submit" onClick="return confirm('ユーザーを停止しますか');" value="停止"><br />
 					</form>
 				</c:if>
 				<c:if test="${ userlist.status == 1 }">
 					<c:out value="停止中" />
 					<form action="usermanager" method="post"><br />
-						<input type="hidden" name="user_id" value="${ userlist.id }" />
+						<input type="hidden" name="userId" value="${ userlist.id }" />
 						<input type="hidden" name="status" value="0" />
-						<input id="submit_button" type="submit" onClick="return confirm('ユーザーを復活しますか');" value="復活"><br />
+						<input id="submitButton" type="submit" onClick="return confirm('ユーザーを復活しますか');" value="復活"><br />
 					</form>
 				</c:if>
 				</td>

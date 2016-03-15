@@ -39,7 +39,7 @@ public class CreateMessageServlet extends HttpServlet {
 		User user = (User) session.getAttribute("loginUser");
 
 		Message message = new Message();
-		message.setUser_id(user.getId());
+		message.setUserId(user.getId());
 		message.setTitle(request.getParameter("title"));
 		message.setText(request.getParameter("text"));
 		message.setCategory(request.getParameter("category"));

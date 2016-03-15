@@ -28,8 +28,8 @@
 </div>
 <div class="input-main">
 <form action="createuser" name="createuser" method="post"><br />
-	<label for="login_id">ログインID</label>
-	<input name="login_id" id="login_id" value="${ inputData.login_id }" /><br />
+	<label for="loginId">ログインID</label>
+	<input name="loginId" id="loginId" value="${ inputData.loginId }" /><br />
 
 	<label for="password">パスワード</label>
 	<input type="password" name="password" id="password" /><br />
@@ -39,25 +39,26 @@
 	<label for="name">名称</label>
 	<input name="name" id="name" value="${ inputData.name }" /><br />
 
-	<label for="branch_id" >支店</label>
-		<select name="branch_id">
+	<label for="branchId" >支店</label>
+		<select name="branchId">
 			<option value="0">選択してください</option>
 				<c:forEach items="${ branchList }" var="branchList">
 					<option value="${ branchList.id }" >${ branchList.name }</option>
 				</c:forEach>
 		</select>
-	<label for="department_id">部署・役職</label>
-		<select name="department_id">
+	<label for="departmentId">部署・役職</label>
+		<select name="departmentId">
 			<option value="0">選択してください</option>
 				<c:forEach items="${ departmentList }" var="departmentList">
 					<option value="${ departmentList.id }">${ departmentList.name }</option>
 				</c:forEach>
 		</select>
 		<span style="margin-right: 80px;"></span>
-	<input id="submit_button" type="submit" value="登録" /><br />
+	<input id="registButton" type="submit" value="登録" /><br />
 </form>
-<div class="back"><a href="usermanager" class="back">戻る</a></div>
 </div>
+<div class="back"><a href="usermanager" class="back">戻る</a></div>
+
 </div>
 </div>
 

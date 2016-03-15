@@ -36,12 +36,12 @@
 	<label for="category">カテゴリー</label>
 	<div style="display:inline-flex">
 		<input name="category" value="${ inputData.category }" id="category" /><br />
-		<span style="margin-right: 50px;"></span>
-		<input id="submit_button" type="submit" value="登録" /><br />
+		<span style="margin-right: 80px;"></span>
+		<input id="registButton" type="submit" value="登録" /><br />
 	</div>
 </form>
-<div class="back"><a href="home" class="back">戻る</a></div>
 </div>
+<div class="back"><a href="home" class="back">戻る</a></div>
 </div>
 
 </div>

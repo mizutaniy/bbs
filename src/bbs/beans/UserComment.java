@@ -7,10 +7,10 @@ public class UserComment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-	private int message_id;
+	private int messageId;
 	private String text;
 	private String name;
-	private int branch_id;
+	private int branchId;
 	private Date insertDate;
 
 	public int getId() {
@@ -19,11 +19,11 @@ public class UserComment implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getMessage_id() {
-		return message_id;
+	public int getMessageId() {
+		return messageId;
 	}
-	public void setMessage_id(int message_id) {
-		this.message_id = message_id;
+	public void setMessageId(int messageId) {
+		this.messageId = messageId;
 	}
 	public String getText() {
 		return text;
@@ -37,11 +37,11 @@ public class UserComment implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getBranch_id() {
-		return branch_id;
+	public int getBranchId() {
+		return branchId;
 	}
-	public void setBranch_id(int branch_id) {
-		this.branch_id = branch_id;
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
 	}
 	public Date getInsertDate() {
 		return insertDate;

@@ -45,21 +45,21 @@ public class UserMessageDao {
 		List<UserMessage> ret = new ArrayList<UserMessage>();
 		try {
 			while(rs.next()) {
-				int message_id = rs.getInt("message_id");
+				int messageId = rs.getInt("message_id");
 				String title = rs.getString("title");
 				String text = rs.getString("text");
 				String name = rs.getString("name");
 				String category = rs.getString("category");
-				int branch_id = rs.getInt("branch_id");
+				int branchId = rs.getInt("branch_id");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 
 				UserMessage message = new UserMessage();
-				message.setMessage_id(message_id);
+				message.setMessageId(messageId);
 				message.setTitle(title);
 				message.setText(text);
 				message.setName(name);
 				message.setCategory(category);
-				message.setBranch_id(branch_id);
+				message.setBranchId(branchId);
 				message.setInsertDate(insertDate);
 
 				ret.add(message);

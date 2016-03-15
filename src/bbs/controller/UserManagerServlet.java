@@ -32,10 +32,10 @@ public class UserManagerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
-		int user_id = Integer.parseInt(request.getParameter("user_id"));
+		int userId = Integer.parseInt(request.getParameter("userId"));
 		int status = Integer.parseInt(request.getParameter("status"));
 
-		new UserListService().update(user_id, status);
+		new UserListService().update(userId, status);
 		response.sendRedirect("usermanager");
 	}
 

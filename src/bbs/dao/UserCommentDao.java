@@ -43,18 +43,18 @@ public class UserCommentDao {
 		try {
 			while(rs.next()) {
 				int id = rs.getInt("id");
-				int message_id = rs.getInt("message_id");
+				int messageId = rs.getInt("message_id");
 				String text = rs.getString("text");
 				String name = rs.getString("name");
-				int branch_id = rs.getInt("branch_id");
+				int branchId = rs.getInt("branch_id");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 
 				UserComment comment = new UserComment();
 				comment.setId(id);
-				comment.setMessage_id(message_id);
+				comment.setMessageId(messageId);
 				comment.setText(text);
 				comment.setName(name);
-				comment.setBranch_id(branch_id);
+				comment.setBranchId(branchId);
 				comment.setInsertDate(insertDate);
 
 				ret.add(comment);

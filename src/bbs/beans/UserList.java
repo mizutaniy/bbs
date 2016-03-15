@@ -7,10 +7,10 @@ public class UserList implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-	private String login_id;
+	private String loginId;
 	private String name;
-	private String branch_name;
-	private String department_name;
+	private String branchName;
+	private String departmentName;
 	private int status;
 	private Date update;
 
@@ -20,11 +20,11 @@ public class UserList implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getLogin_id() {
-		return login_id;
+	public String getLoginId() {
+		return loginId;
 	}
-	public void setLogin_id(String login_id) {
-		this.login_id = login_id;
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 	public String getName() {
 		return name;
@@ -32,17 +32,17 @@ public class UserList implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBranch_name() {
-		return branch_name;
+	public String getBranchName() {
+		return branchName;
 	}
-	public void setBranch_name(String branch_name) {
-		this.branch_name = branch_name;
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
-	public String getDepartment_name() {
-		return department_name;
+	public String getDepartmentName() {
+		return departmentName;
 	}
-	public void setDepartment_name(String department_name) {
-		this.department_name = department_name;
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 	public int getStatus() {
 		return status;
