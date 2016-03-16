@@ -51,6 +51,8 @@ public class UserMessageDao {
 				String name = rs.getString("name");
 				String category = rs.getString("category");
 				int branchId = rs.getInt("branch_id");
+				String branchName = rs.getString("branch_name");
+				String departmentName = rs.getString("department_name");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 
 				UserMessage message = new UserMessage();
@@ -60,6 +62,8 @@ public class UserMessageDao {
 				message.setName(name);
 				message.setCategory(category);
 				message.setBranchId(branchId);
+				message.setBranchName(branchName);
+				message.setDepartmentName(departmentName);
 				message.setInsertDate(insertDate);
 
 				ret.add(message);

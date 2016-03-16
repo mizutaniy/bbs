@@ -11,6 +11,8 @@ public class UserComment implements Serializable {
 	private String text;
 	private String name;
 	private int branchId;
+	private String branchName;
+	private String departmentName;
 	private Date insertDate;
 
 	public int getId() {
@@ -42,6 +44,18 @@ public class UserComment implements Serializable {
 	}
 	public void setBranchId(int branchId) {
 		this.branchId = branchId;
+	}
+	public String getBranchName() {
+		return branchName;
+	}
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+	public String getDepartmentName() {
+		return departmentName;
+	}
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 	public Date getInsertDate() {
 		return insertDate;

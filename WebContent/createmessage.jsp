@@ -11,6 +11,11 @@
 </head>
 <body>
 <div class="main-contents">
+<div class="header" style="display:inline-flex">
+	<a href="home" class="botton">ホーム</a>
+	<span style="margin-right: 10px;"></span>
+	<a href="logout" class="botton">ログアウト</a>
+</div><br />
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -25,8 +30,8 @@
 <div class="input-top">
 <c:out value="新規投稿" />
 </div>
+<form action="createmessage" method="post">
 <div class="input-main">
-<form action="createmessage" method="post"><br />
 	<label for="title">件名</label>
 	<input name="title" value="${ inputData.title }" id="title" size="40" /><br />
 
@@ -34,14 +39,10 @@
 	<textarea name="text" cols="50" rows="10" id="text" wrap="hard">${ inputData.text }</textarea><br />
 
 	<label for="category">カテゴリー</label>
-	<div style="display:inline-flex">
 		<input name="category" value="${ inputData.category }" id="category" /><br />
-		<span style="margin-right: 80px;"></span>
-		<input id="registButton" type="submit" value="登録" /><br />
-	</div>
-</form>
 </div>
-<div class="back"><a href="home" class="back">戻る</a></div>
+<input id="registButton" type="submit" value="登録" />
+</form>
 </div>
 
 </div>

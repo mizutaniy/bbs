@@ -17,37 +17,39 @@
 </head>
 <body>
 <div class="main-contents">
-
-<div class="header" style="display:inline-flex">
-	<a href="createmessage" class="botton">新規投稿</a>
-	<span style="margin-right: 10px;"></span>
-	<a href="usermanager" class="botton">ユーザー管理</a>
-	<span style="margin-right: 10px;"></span>
-	<a href="logout" class="botton">ログアウト</a>
-</div><br />
-<div class="narrow">
-	<div style="display:inline-flex">
-	<form action="home" method="get"><br />
-		<select name="category">
-			<option value="">カテゴリー</option>
-			<option value="">すべて表示</option>
-			<c:forEach items="${ categories }" var="category">
-				<option value="${ category.category }">${ category.category }</option>
-			</c:forEach>
-		</select>
+	<div class="header" style="display:inline-flex">
+		<a href="createmessage" class="botton">新規投稿</a>
 		<span style="margin-right: 10px;"></span>
+		<a href="usermanager" class="botton">ユーザー管理</a>
+		<span style="margin-right: 10px;"></span>
+		<a href="logout" class="botton">ログアウト</a>
+	</div><br />
+	<div class="loginUser">
+		<c:out value="ログイン中 ：${ user.name }" />
+	</div>
+	<div class="narrow">
 		<div style="display:inline-flex">
-		<div style="display:inline-flex">
-        	<label >From:</label><input type="text" name="insertFrom" id="insertFrom" placeholder="クリックしてください" />
-        </div>
-        <span style="margin-right: 10px;"></span>
-        <div style="display:inline-flex">
-        	<label >To:</label><input type="text" name="insertTo" id="insertTo" placeholder="クリックしてください" />
-        </div>
-        <span style="margin-right: 10px;"></span>
-		<input id="submitButton" type="submit" value="検索"><br />
-		</div>
-	</form>
+		<form action="home" method="get"><br />
+			<select name="category">
+				<option value="">カテゴリー</option>
+				<option value="">すべて表示</option>
+				<c:forEach items="${ categories }" var="category">
+					<option value="${ category.category }">${ category.category }</option>
+				</c:forEach>
+			</select>
+			<span style="margin-right: 10px;"></span>
+			<div style="display:inline-flex">
+				<div style="display:inline-flex">
+					<label >From:</label><input type="text" name="insertFrom" id="insertFrom" placeholder="クリックしてください" />
+				 </div>
+				 <span style="margin-right: 10px;"></span>
+				 <div style="display:inline-flex">
+        			<label >To:</label><input type="text" name="insertTo" id="insertTo" placeholder="クリックしてください" />
+				 </div>
+				<span style="margin-right: 10px;"></span>
+				<input id="submitButton" type="submit" value="検索"><br />
+			</div>
+		</form>
 	</div>
 </div>
 <c:if test="${ not empty errorMessages }">
@@ -64,17 +66,18 @@
 <div class="messages">
 	<c:forEach items="${ messages }" var="message">
 		<div class="view">
-		<div class="message">
-			<div class="messagetop">
-				<div class="title"><span class="title"><c:out value="${ message.title }" /></span></div>
-			</div>
-			<div class="category"><span class="category"><c:out value="カテゴリー：${ message.category }" /></span></div>
-			<div class="text"><span class="span">
-			<c:forEach var="str" items="${fn:split(message.text,'
+			<div class="message">
+				<div class="messagetop">
+					<div class="title"><span class="title"><c:out value="${ message.title }" /></span></div>
+				</div>
+				<div class="category"><span class="category"><c:out value="カテゴリー：${ message.category }" /></span></div>
+				<div class="text"><span class="span">
+					<c:forEach var="str" items="${fn:split(message.text,'
 ')}" ><c:out value="${str}" /><br></c:forEach>
-			</span></div>
-			<div class="messagebottom" style="display:inline-flex">
-				<div class="name"><span class="span"><c:out value="投稿者：${ message.name }" /></span></div>
+				</span></div>
+				<div class="messagebottom" style="display:inline-flex">
+				<div class="name"><span class="span">
+					<c:out value="${ message.branchName } （ ${ message.departmentName } ） / ${ message.name }" /></span></div>
 				<span style="margin-right: 30px;"></span>
 				<div class="date"><fmt:formatDate value="${ message.insertDate }" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			</div>
@@ -96,7 +99,8 @@
 ')}" ><c:out value="${splitcomment}" /><br></c:forEach>
 						</span></div>
 						<div style="display:inline-flex">
-							<div class="name"><span class="name"><c:out value="投稿者：${ comment.name }" /></span></div>
+							<div class="name"><span class="name">
+							<c:out value=" ${ comment.branchName } （ ${ comment.departmentName } ） / ${ comment.name }" /></span></div>
 							<span style="margin-right: 30px;"></span>
 							<div class="date"><fmt:formatDate value="${ comment.insertDate }" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 						</div>
@@ -139,7 +143,7 @@
             numberOfMonths: 1,
             showCurrentAtPos: 0,
             dateFormat:"yy/mm/dd",
-            minDate: new Date(2016, 3 - 1, 11),
+            minDate: new Date(2016, 3 - 1, 1),
             maxDate: '+0d',
             onSelect: function( selectedDate ) {
                 var option = this . id == 'insertFrom' ? 'minDate' : 'maxDate',

@@ -13,8 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
+import bbs.beans.BranchList;
+import bbs.beans.DepartmentList;
 import bbs.beans.User;
 import bbs.exception.NoRowsUpdatedRuntimeException;
+import bbs.service.BranchDepartmentService;
 import bbs.service.UserListService;
 import bbs.utils.CipherUtil;
 
@@ -34,6 +37,12 @@ public class EditUserServlet extends HttpServlet {
 		if (userId != null && userId.matches("^\\d{1,9}$")) {
 			User editUser = new UserListService().getSelectUser(Integer.parseInt(userId));
 			if(editUser != null) {
+
+				List<BranchList> branchList = new BranchDepartmentService().getBranchList();
+				List<DepartmentList> departmentList = new BranchDepartmentService().getDepartmentList();
+
+				request.setAttribute("branchList", branchList);
+				request.setAttribute("departmentList", departmentList);
 				request.setAttribute("editUser", editUser);
 				request.getRequestDispatcher("edituser.jsp").forward(request, response);
 				return;
@@ -85,6 +94,11 @@ public class EditUserServlet extends HttpServlet {
 				response.sendRedirect("settings");
 			}
 		} else {
+			List<BranchList> branchList = new BranchDepartmentService().getBranchList();
+			List<DepartmentList> departmentList = new BranchDepartmentService().getDepartmentList();
+
+			request.setAttribute("branchList", branchList);
+			request.setAttribute("departmentList", departmentList);
 			session.setAttribute("errorMessages", messages);
 			request.setAttribute("editUser", user);
 			request.getRequestDispatcher("edituser.jsp").forward(request, response);
@@ -115,7 +129,7 @@ public class EditUserServlet extends HttpServlet {
 		if(!StringUtils.isEmpty(password) && StringUtils.isEmpty(passwordConfirm)) {
 			messages.add("確認用パスワードを入力してください");
 		}
-		if(!StringUtils.isEmpty(password) && !password.equals(passwordConfirm)) {
+		if(!password.equals(passwordConfirm)) {
 			messages.add("パスワードと確認用パスワードが違います。");
 		}
 

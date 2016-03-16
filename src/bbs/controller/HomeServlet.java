@@ -78,6 +78,8 @@ public class HomeServlet extends HttpServlet {
 			request.setAttribute("branchId", branchId);
 			request.setAttribute("departmentId", departmentId);
 
+			request.setAttribute("user", user);
+
 			request.getRequestDispatcher("top.jsp").forward(request, response);
 	}
 

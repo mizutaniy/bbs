@@ -28,7 +28,8 @@ public class UserListDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT users.id, login_id, name, branch_name, department_name, status, update_date FROM users, branches, departments ");
+			sql.append("SELECT users.id, login_id, users.name, branches.name AS branch_name, departments.name AS department_name, status, update_date ");
+			sql.append("FROM users, branches, departments ");
 			sql.append("WHERE branch_id = branches.id AND department_id = departments.id ORDER BY users.id");
 
 			ps = connection.prepareStatement(sql.toString());
@@ -253,7 +254,7 @@ public class UserListDao {
 		try {
 			while(rs.next()) {
 				int id = rs.getInt("id");
-				String name = rs.getString("branch_name");
+				String name = rs.getString("name");
 
 				BranchList branchlist = new BranchList();
 				branchlist.setId(id);
@@ -274,7 +275,7 @@ public class UserListDao {
 		try {
 			while(rs.next()) {
 				int id = rs.getInt("id");
-				String name = rs.getString("department_name");
+				String name = rs.getString("name");
 
 
 				DepartmentList departmentlist = new DepartmentList();

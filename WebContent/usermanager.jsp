@@ -17,6 +17,8 @@
 	<a href="createuser" class="botton">ユーザー新規登録</a>
 	<span style="margin-right: 10px;"></span>
 	<a href="home" class="botton">ホーム</a>
+	<span style="margin-right: 10px;"></span>
+	<a href="logout" class="botton">ログアウト</a>
 </div><br />
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">

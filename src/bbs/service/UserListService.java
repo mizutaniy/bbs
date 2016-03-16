@@ -67,12 +67,8 @@ public class UserListService {
 		try {
 			connection = getConnection();
 
-			//String encPassword = CipherUtil.encrypt(user.getPassword());
-			//user.setPassword(encPassword);
-
 			UserListDao userlistDao = new UserListDao();
 			userlistDao.update(connection, user);
-			//userlistDao.update(connection, user, encPassword);
 
 			commit(connection);
 		} catch (RuntimeException e) {

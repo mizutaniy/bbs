@@ -20,9 +20,9 @@ public class UserCommentDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("SELECT comments.id, message_id, text, name, branch_id, comments.insert_date ");
-			sql.append("FROM users, comments WHERE users.id = comments.user_id ");
-			sql.append("ORDER BY comments.insert_date");
+			sql.append("SELECT * FROM user_comment ORDER BY insert_date");
+			//sql.append("FROM users, comments WHERE users.id = comments.user_id ");
+			//sql.append("ORDER BY comments.insert_date");
 
 			ps = connection.prepareStatement(sql.toString());
 
@@ -47,6 +47,8 @@ public class UserCommentDao {
 				String text = rs.getString("text");
 				String name = rs.getString("name");
 				int branchId = rs.getInt("branch_id");
+				String branchName = rs.getString("branch_name");
+				String departmentName = rs.getString("department_name");
 				Timestamp insertDate = rs.getTimestamp("insert_date");
 
 				UserComment comment = new UserComment();
@@ -55,6 +57,8 @@ public class UserCommentDao {
 				comment.setText(text);
 				comment.setName(name);
 				comment.setBranchId(branchId);
+				comment.setBranchName(branchName);
+				comment.setDepartmentName(departmentName);
 				comment.setInsertDate(insertDate);
 
 				ret.add(comment);

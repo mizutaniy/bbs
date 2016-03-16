@@ -12,6 +12,13 @@
 </head>
 <body>
 <div class="main-contents">
+<div class="header" style="display:inline-flex">
+	<a href="usermanager" class="botton">ユーザー管理</a>
+	<span style="margin-right: 10px;"></span>
+	<a href="home" class="botton">ホーム</a>
+	<span style="margin-right: 10px;"></span>
+	<a href="logout" class="botton">ログアウト</a>
+</div>
 <c:if test="${ not empty errorMessages }">
 	<div class="errorMessages">
 		<ul>
@@ -26,8 +33,8 @@
 <div class="input-top">
 <c:out value="ユーザー新規登録" />
 </div>
-<div class="input-main">
 <form action="createuser" name="createuser" method="post"><br />
+<div class="input-main">
 	<label for="loginId">ログインID</label>
 	<input name="loginId" id="loginId" value="${ inputData.loginId }" /><br />
 
@@ -42,23 +49,36 @@
 	<label for="branchId" >支店</label>
 		<select name="branchId">
 			<option value="0">選択してください</option>
-				<c:forEach items="${ branchList }" var="branchList">
-					<option value="${ branchList.id }" >${ branchList.name }</option>
-				</c:forEach>
+			<c:forEach items="${ branchList }" var="branchList">
+				<c:choose>
+					<c:when test="${ inputData.branchId == branchList.id }">
+					 	<option value="${ branchList.id }" selected>${ branchList.name }</option>
+					 </c:when>
+					 <c:otherwise>
+					 	<option value="${ branchList.id }" >${ branchList.name }</option>
+					 </c:otherwise>
+					</c:choose>
+			</c:forEach>
 		</select>
 	<label for="departmentId">部署・役職</label>
 		<select name="departmentId">
 			<option value="0">選択してください</option>
 				<c:forEach items="${ departmentList }" var="departmentList">
-					<option value="${ departmentList.id }">${ departmentList.name }</option>
+					<c:choose>
+					<c:when test="${ inputData.departmentId == departmentList.id }">
+					 	<option value="${ departmentList.id }" selected>${ departmentList.name }</option>
+					 </c:when>
+					 <c:otherwise>
+					 	<option value="${ departmentList.id }" >${ departmentList.name }</option>
+					 </c:otherwise>
+					</c:choose>
 				</c:forEach>
 		</select>
-		<span style="margin-right: 80px;"></span>
-	<input id="registButton" type="submit" value="登録" /><br />
-</form>
-</div>
-<div class="back"><a href="usermanager" class="back">戻る</a></div>
 
+
+</div>
+<input id="registButton" type="submit" value="登録" />
+</form>
 </div>
 </div>
 
